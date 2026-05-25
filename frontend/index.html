@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    ============================================================
+    index.html — Main Portfolio Page
+    ============================================================
+    This is the single HTML file that contains ALL sections
+    of the portfolio website:
+      - Navbar         : Navigation links at the top
+      - Hero           : Big intro section with name and title
+      - About          : Short bio and profile image area
+      - Skills         : Grid of skill cards
+      - Projects       : Showcase of work/projects
+      - Contact        : Form that sends data to the backend API
+      - Footer         : Social links and copyright
+
+    HOW IT CONNECTS TO THE BACKEND:
+      - The contact form in this file sends data to:
+          POST http://localhost:3000/api/contact
+      - This is handled in frontend/js/main.js using fetch().
+      - The backend stores the message in backend/data/messages.json.
+    ============================================================
+  -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Rajesh Kundu — Electrical Engineering Student &amp; Web Developer</title>
+  <meta name="description" content="Portfolio of Rajesh Kundu, an Electrical Engineering B.Tech 3rd year student and beginner web developer." />
+  <meta name="keywords" content="Rajesh Kundu, Electrical Engineering, Web Developer, IoT, Portfolio, Cricket Auction, Robot Car" />
+  <meta name="author" content="Rajesh Kundu" />
+
+  <!-- Open Graph (for social media sharing previews) -->
+  <meta property="og:title" content="Rajesh Kundu — Electrical Engineering Student &amp; Web Developer" />
+  <meta property="og:description" content="Portfolio of Rajesh Kundu, Electrical Engineering student and Web Developer." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Inter for clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR — Top navigation bar
+       Fixed at the top; links scroll to each section.
+       JavaScript in main.js adds 'scrolled' class when
+       the user scrolls down to change its background.
+  ══════════════════════════════════════════════════ -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <!-- Logo / Brand Name -->
+      <a href="#hero" class="nav-logo">RK<span class="accent">.</span></a>
+
+      <!-- Hamburger icon (visible only on mobile) -->
+      <button id="hamburger" class="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="#about"    class="nav-link">About</a></li>
+        <li><a href="#skills"   class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact"  class="nav-link">Contact</a></li>
+        <li>
+          <a href="#contact" class="nav-link btn-hire">Hire Me</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════
+       HERO SECTION — The first thing the visitor sees
+       Contains the animated greeting, name, title,
+       a brief tagline, and call-to-action buttons.
+  ══════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <!-- Animated background orbs for visual depth -->
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+
+    <div class="hero-content">
+      <!-- Greeting line with wave animation -->
+      <p class="hero-greeting">👋 Hello, I'm</p>
+
+      <!-- Main name heading -->
+      <h1 class="hero-name">Rajesh Kundu</h1>
+
+      <!-- Typed title effect — JS animates this text -->
+      <h2 class="hero-title">
+        I'm a <span id="typed-text" class="typed-text"></span>
+        <span class="cursor">|</span>
+      </h2>
+
+      <!-- Short tagline -->
+      <p class="hero-tagline">
+        I am an Electrical Engineering student pursuing my B.Tech 3rd Year,
+        combining core engineering with web development, IoT, and robotics.
+      </p>
+
+      <!-- Call to action buttons -->
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact"  class="btn btn-secondary">Get In Touch</a>
+      </div>
+
+      <!-- Scroll down indicator -->
+      <div class="scroll-indicator">
+        <span>Scroll Down</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       ABOUT SECTION — Bio and personal information
+  ══════════════════════════════════════════════════ -->
+  <section id="about" class="section about">
+    <div class="container">
+      <!-- Section Title -->
+      <div class="section-header">
+        <span class="section-tag">Get to Know Me</span>
+        <h2 class="section-title">About <span class="accent">Me</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <!-- Left: Avatar / Profile Image -->
+        <div class="about-image-wrapper fade-in">
+          <div class="about-avatar">
+            <!-- Initials avatar (can be replaced with a real photo) -->
+            <div class="avatar-initials">RK</div>
+            <!-- Decorative ring -->
+            <div class="avatar-ring"></div>
+          </div>
+          <!-- Stats cards below avatar -->
+          <div class="about-stats">
+            <div class="stat-card">
+              <span class="stat-number">3rd</span>
+              <span class="stat-label">Year B.Tech</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">4+</span>
+              <span class="stat-label">Projects Built</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">IoT</span>
+              <span class="stat-label">&amp; Robotics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Bio Text -->
+        <div class="about-text fade-in">
+          <h3>Electrical Engineering Student &amp; Web Developer from India 🇮🇳</h3>
+          <p>
+            I'm <strong>Rajesh Kundu</strong>, currently pursuing my B.Tech 3rd year in Electrical Engineering.
+            Alongside my core academic studies, I am actively building my skills as a beginner web developer,
+            bridging the gap between hardware systems and web interfaces.
+          </p>
+          <p>
+            My engineering coursework gives me a solid foundation in systems like electrical machines,
+            instruments, and automation. My passion for programming drove me to learn modern web technologies,
+            allowing me to construct functional web apps and interface them with hardware systems.
+          </p>
+          <p>
+            I love working on projects that involve IoT, microcontroller programming, machine learning, and clean web layouts.
+            I'm always eager to learn, build, and explore new technical horizons.
+          </p>
+
+          <!-- Download Resume button -->
+          <a href="#" class="btn btn-primary" id="btn-resume">Download Resume 📄</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SKILLS SECTION — Technologies I work with
+  ══════════════════════════════════════════════════ -->
+  <section id="skills" class="section skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I Know</span>
+        <h2 class="section-title">My <span class="accent">Skills</span></h2>
+      </div>
+
+      <!-- Skill cards grid -->
+      <div class="skills-grid">
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">🌐</div>
+          <h4>HTML5 / CSS3</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+          <span class="skill-percent">85%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">⚡</div>
+          <h4>JavaScript (ES6+)</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          <span class="skill-percent">75%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">📡</div>
+          <h4>Internet of Things (IoT)</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          <span class="skill-percent">80%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">📊</div>
+          <h4>MATLAB</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          <span class="skill-percent">75%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">📐</div>
+          <h4>PSpice</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+          <span class="skill-percent">70%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">⚙️</div>
+          <h4>Electrical Machines</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+          <span class="skill-percent">80%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">🔌</div>
+          <h4>Electrical Instruments</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          <span class="skill-percent">75%</span>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-icon">🔧</div>
+          <h4>Git &amp; GitHub</h4>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+          <span class="skill-percent">75%</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       PROJECTS SECTION — Showcase of work
+  ══════════════════════════════════════════════════ -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">My Work</span>
+        <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+      </div>
+
+      <!-- Projects grid: each card shows project info -->
+      <div class="projects-grid">
+
+        <!-- Project Card 1 -->
+        <div class="project-card fade-in">
+          <div class="project-img" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+            <span class="project-emoji">🏏</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <h3 class="project-title">Cricket Auction App</h3>
+            <p class="project-desc">
+              A web application for simulated or real-time cricket player bidding, featuring a dashboard to manage player budgets, stats, and squad selection.
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
+              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 2 -->
+        <div class="project-card fade-in">
+          <div class="project-img" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+            <span class="project-emoji">🌤️</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">API</span>
+            </div>
+            <h3 class="project-title">Weather Forecast App</h3>
+            <p class="project-desc">
+              A clean web application that fetches real-time weather information and forecasts for any city using a public weather API, with dynamic backgrounds.
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
+              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 3 -->
+        <div class="project-card fade-in">
+          <div class="project-img" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+            <span class="project-emoji">🤖</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">IoT</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Python</span>
+              <span class="tag">Hardware</span>
+            </div>
+            <h3 class="project-title">Voice Controlled Robot Car</h3>
+            <p class="project-desc">
+              An IoT project featuring a robotic car controlled by voice commands processed through a custom-trained machine learning model to ensure high-accuracy control.
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
+              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 4 -->
+        <div class="project-card fade-in">
+          <div class="project-img" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            <span class="project-emoji">🚗</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Robotics</span>
+              <span class="tag">Sensors</span>
+              <span class="tag">Microcontrollers</span>
+              <span class="tag">Electrical</span>
+            </div>
+            <h3 class="project-title">Automatic Path Select Robot Car</h3>
+            <p class="project-desc">
+              An autonomous robotic car that detects obstacles and selects the optimal path dynamically using sensors, pathfinding algorithms, and microcontrollers.
+            </p>
+            <div class="project-links">
+              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
+              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       CONTACT SECTION — Form connected to the backend
+       HOW IT WORKS:
+         1. User fills in name, email, message.
+         2. JavaScript intercepts the submit event.
+         3. fetch() sends the data to POST /api/contact.
+         4. Backend saves it to messages.json.
+         5. Success/error message is shown to the user.
+  ══════════════════════════════════════════════════ -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Let's Talk</span>
+        <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left: Contact Info Cards -->
+        <div class="contact-info fade-in">
+          <h3>Let's work together!</h3>
+          <p>
+            Have a project in mind? Want to collaborate? Or just want to say hi?
+            Fill out the form and I'll get back to you as soon as possible.
+          </p>
+
+          <!-- Info items -->
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <strong>Email</strong>
+              <p>kundurj4359@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Location</strong>
+              <p>India 🇮🇳</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            <div>
+              <strong>Available For</strong>
+              <p>Freelance &amp; Full-Time Roles</p>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div class="social-links">
+            <a href="https://github.com"   target="_blank" class="social-btn" id="link-github">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" class="social-btn" id="link-linkedin">LinkedIn</a>
+            <a href="https://twitter.com"  target="_blank" class="social-btn" id="link-twitter">Twitter</a>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form -->
+        <div class="contact-form-wrapper fade-in">
+          <!--
+            id="contact-form" is used by main.js to attach the submit event listener.
+            On submit, main.js collects the form data and sends it to the backend.
+          -->
+          <form id="contact-form" class="contact-form" novalidate>
+
+            <!-- Name Field -->
+            <div class="form-group">
+              <label for="contact-name">Full Name *</label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                placeholder="Your full name"
+                required
+                autocomplete="name"
+              />
+              <span class="field-error" id="error-name"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="contact-email">Email Address *</label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                placeholder="your.email@example.com"
+                required
+                autocomplete="email"
+              />
+              <span class="field-error" id="error-email"></span>
+            </div>
+
+            <!-- Subject Field -->
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input
+                type="text"
+                id="contact-subject"
+                name="subject"
+                placeholder="What is this about?"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+              <label for="contact-message">Message *</label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                placeholder="Tell me about your project..."
+                required
+              ></textarea>
+              <span class="field-error" id="error-message"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="btn-submit" class="btn btn-primary btn-full">
+              Send Message 🚀
+            </button>
+
+            <!-- Response message shown after form submission -->
+            <div id="form-response" class="form-response" aria-live="polite"></div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">RK<span class="accent">.</span></p>
+      <p class="footer-copy">
+        © <span id="footer-year"></span> Rajesh Kundu. Built with ❤️ using HTML, CSS, JS &amp; Node.js.
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <!-- This handles: animations, nav scroll, typed text, form submission -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
