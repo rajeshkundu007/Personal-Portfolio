@@ -1,9 +1,36 @@
-# 🚀 Rajesh Kundu — Portfolio Website
+# ⚡ RJ_GRID — Electrical Engineering Portfolio
 
-A complete **Full Stack Portfolio Website** built with:
+A highly immersive, **Full Stack SCADA / Substation Themed Portfolio Website** built for an electrical engineering student. 
+
+This project transforms a standard web portfolio into an interactive high-voltage power grid.
+
+## 🚀 Technologies
 - **Frontend**: Vanilla HTML5, CSS3, JavaScript (ES6+)
+- **Graphics Engine**: HTML5 Canvas (Lightning generator) & Inline SVGs
 - **Backend**: Node.js + Express
 - **Storage**: JSON file (no database setup needed)
+
+---
+
+## 🔌 Core Features & Aesthetics
+
+### 1. The Substation SCADA Interface
+The entire UI is modeled after an industrial SCADA system. It features CRT screen effects, glowing neon cyan and high-voltage amber accents, and technical typography.
+
+### 2. High-Fidelity Inline SVGs
+- **The Transformer**: The hero section features a responsive, CSS-styled power transformer with cooling radiators, high-voltage bushings, and ribbed insulators.
+- **Transmission Towers**: SVG transmission towers act as section dividers, stringing the layout together.
+
+### 3. Interactive Power Line System
+- **3-Phase Power**: A 3-phase (Red, Yellow, Blue) transmission wire system runs the entire length of the page.
+- **Energy Flow**: Asynchronous glowing pulses travel down the R-Y-B phases to mimic alternating current offsets.
+- **Electric Cursor**: A custom mouse follower that emits electrical sparks and jitters when interacting with buttons.
+
+### 4. 120 FPS Lightning Engine
+The background is powered by an HTML5 `<canvas>` that randomly generates bold, GPU-accelerated lightning strikes to give the site an incredibly alive and dangerous feel.
+
+### 5. 100% Mobile Responsive
+The grid auto-scales for mobile devices. The transformer tank tucks in its cooling fins, the transmission towers shift safely to the margins, and the typography shrinks to maintain a clean reading experience without horizontal scrollbars.
 
 ---
 
@@ -32,13 +59,6 @@ NOTIFY_EMAIL=kundurj4359@gmail.com
 ```bash
 node server.js
 ```
-You'll see: `📧 Email transporter ready — notifications will be sent to: kundurj4359@gmail.com`
-
-### New file added: `backend/config/mailer.js`
-- Creates the Gmail SMTP transporter using your `.env` credentials
-- Exports `sendNotificationEmail(messageData)` — called by `routes/contact.js` after every form save
-- Sends a **beautiful HTML email** with the visitor's name, email, subject, message, and timestamp
-- Uses `replyTo` set to the visitor's email so you can **just hit Reply** in Gmail
 
 ---
 
@@ -56,149 +76,14 @@ portfolio/
 │
 ├── frontend/
 │   ├── index.html             ← Single-page HTML (all sections)
+│   ├── Rajesh_Kundu_CV.pdf    ← Downloadable Resume
 │   ├── css/
-│   │   └── style.css          ← All styles (dark theme, animations)
+│   │   └── style.css          ← Substation SCADA styles & animations
 │   └── js/
-│       └── main.js            ← Interactions, animations, form API call
+│       └── main.js            ← Lightning engine, typing effect, APIs
 │
 └── README.md                  ← This file
 ```
-
----
-
-## 📄 File-by-File Explanation
-
-### Backend Files
-
-#### `backend/server.js`
-The **main entry point** of the backend server.
-- Creates an Express app
-- Applies middleware (CORS, JSON body parser)
-- **Serves the `frontend/` folder as static files** — so visiting `http://localhost:3000` loads `index.html`
-- Mounts the contact API at `/api/contact`
-- Starts listening on port **3000**
-
-#### `backend/routes/contact.js`
-Handles all requests to `/api/contact`.
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/contact` | Saves a new contact form message |
-| `GET`  | `/api/contact` | Returns all saved messages (for debugging) |
-
-- Validates that `name`, `email`, and `message` are present
-- Validates email format with a regex
-- Appends the new message (with timestamp and ID) to `messages.json`
-- Returns a JSON response: `{ success: true, message: "..." }`
-
-#### `backend/data/messages.json`
-A simple JSON array that stores all contact form submissions.
-```json
-[
-  {
-    "id": 1700000000000,
-    "name": "John Doe",
-    "email": "john@example.com",
-    "message": "Hi, I'd love to work with you!",
-    "receivedAt": "2024-01-15T10:30:00.000Z"
-  }
-]
-```
-
-#### `backend/package.json`
-Lists the Node.js dependencies:
-| Package | Purpose |
-|---------|---------|
-| `express` | Web server framework |
-| `cors` | Allows cross-origin requests during development |
-| `body-parser` | Parses JSON and form data from request body |
-| `nodemon` (dev) | Auto-restarts server on file changes |
-
----
-
-### Frontend Files
-
-#### `frontend/index.html`
-The **only HTML file** — a single page with all sections:
-| Section | Description |
-|---------|-------------|
-| `#hero` | Animated intro with name and typed title |
-| `#about` | Bio, avatar initials, and stats |
-| `#skills` | Skill cards with animated progress bars |
-| `#projects` | Project showcase cards |
-| `#contact` | Form that sends data to the backend |
-| Footer | Social links and copyright |
-
-#### `frontend/css/style.css`
-All styles for the portfolio, organized into 12 sections:
-1. **CSS Variables** — Design tokens (colors, fonts, spacing)
-2. **Reset & Base** — Zero default margins/paddings
-3. **Utilities** — `.container`, `.btn`, `.fade-in`, etc.
-4. **Navbar** — Fixed top bar with scroll-blur effect
-5. **Hero** — Full-screen intro with glowing orbs
-6. **About** — Two-column grid layout
-7. **Skills** — Cards with animated progress bars
-8. **Projects** — Responsive card grid
-9. **Contact** — Two-column form layout
-10. **Footer** — Simple bottom bar
-11. **Animations** — `@keyframes` definitions
-12. **Responsive** — Mobile breakpoints (≤ 700px, ≤ 900px)
-
-#### `frontend/js/main.js`
-All JavaScript is in one file, split into 7 sections:
-1. **Navbar** — Adds `.scrolled` class on scroll; hamburger menu toggle
-2. **Typed Text** — Cycles through job titles character by character
-3. **Scroll Animations** — Uses `IntersectionObserver` to trigger `.fade-in`
-4. **Skill Bars** — Animates bar widths when they scroll into view
-5. **Active Nav Link** — Highlights the nav link for the visible section
-6. **Contact Form** — Validates then calls `POST /api/contact` via `fetch()`
-7. **Footer Year** — Sets current year automatically
-
----
-
-## 🔌 Frontend ↔ Backend Connection
-
-```
-Browser (index.html)
-       │
-       │  User fills Contact Form and clicks Submit
-       │
-       ▼
-frontend/js/main.js
-       │
-       │  fetch('POST /api/contact', { name, email, message })
-       │  ← HTTP Request over localhost ─────────────────────────┐
-       │                                                          │
-       ▼                                                          │
-backend/server.js                                                 │
-       │                                                          │
-       │  Routes /api/contact → routes/contact.js                │
-       ▼                                                          │
-backend/routes/contact.js                                         │
-       │                                                          │
-       │  Validates data                                          │
-       │  Reads messages.json                                     │
-       │  Appends new message                                     │
-       │  Writes back to messages.json                            │
-       │                                                          │
-       │  Returns { success: true, message: "Thank you!" } ──────┘
-       │
-       ▼
-frontend/js/main.js
-       │
-       │  Displays success message to user
-       │  Resets the form
-```
-
-**The key line in `main.js`:**
-```javascript
-const response = await fetch('/api/contact', {
-  method : 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body   : JSON.stringify({ name, email, subject, message })
-});
-```
-
-Because the backend **serves the frontend as static files**, the frontend and backend share the same origin (`http://localhost:3000`). So `/api/contact` resolves to `http://localhost:3000/api/contact` — no CORS issues.
 
 ---
 
@@ -212,55 +97,12 @@ npm install
 
 ### Step 2 — Start the Server
 ```bash
-node server.js
+npm start
 ```
-Or, for auto-restart on file changes (dev mode):
-```bash
-npm run dev
-```
+*(The server is currently running on `node server.js`)*
 
 ### Step 3 — Open in Browser
-```
-http://localhost:3000
-```
-
-That's it! The server serves both the frontend and the API from a single port.
-
----
-
-## 🌐 API Reference
-
-### `POST /api/contact`
-Submit a contact form message.
-
-**Request Body (JSON):**
-```json
-{
-  "name": "Your Name",
-  "email": "your@email.com",
-  "subject": "Optional Subject",
-  "message": "Your message here."
-}
-```
-
-**Success Response (201):**
-```json
-{
-  "success": true,
-  "message": "Thank you, Your Name! Your message has been received."
-}
-```
-
-**Error Response (400):**
-```json
-{
-  "success": false,
-  "error": "All fields (name, email, message) are required."
-}
-```
-
-### `GET /api/contact`
-View all stored messages (for debugging/admin purposes).
+Visit `http://localhost:3000`
 
 ---
 
@@ -270,24 +112,10 @@ View all stored messages (for debugging/admin purposes).
 |----------------|-------|
 | Your name & bio | `frontend/index.html` → `#about` section |
 | Skills & percentages | `frontend/index.html` → `#skills` section + `data-width` attributes |
-| Projects | `frontend/index.html` → `#projects` section |
+| Github Projects | `frontend/index.html` → `#projects` section |
 | Color scheme | `frontend/css/style.css` → `:root` CSS variables |
 | Typed job titles | `frontend/js/main.js` → `const titles = [...]` array |
-| Social links | `frontend/index.html` → `#link-github`, `#link-linkedin`, `#link-twitter` |
-| Port number | `backend/server.js` → `const PORT = ...` |
-
----
-
-## 📦 Dependencies
-
-| Package | Version | Used For |
-|---------|---------|----------|
-| express | ^4.18.2 | Web server |
-| cors | ^2.8.5 | Cross-origin requests |
-| body-parser | ^1.20.2 | Parsing request bodies |
-| nodemon | ^3.0.1 | Dev auto-restart |
-
-No frontend dependencies — pure HTML, CSS, and JavaScript!
+| Lightning Speed | `frontend/js/main.js` → Adjust `Math.random() > 0.975` in the draw loop |
 
 ---
 
