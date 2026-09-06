@@ -55,7 +55,11 @@ function readMessages() {
  * Uses pretty-printing (2 spaces) so the file is human-readable.
  */
 function writeMessages(messages) {
-  fs.writeFileSync(messagesFilePath, JSON.stringify(messages, null, 2), 'utf-8');
+  try {
+    fs.writeFileSync(messagesFilePath, JSON.stringify(messages, null, 2), 'utf-8');
+  } catch (err) {
+    console.warn("⚠️ Could not save to messages.json (Vercel read-only filesystem). Email notification will still send.");
+  }
 }
 
 // ─── 4. POST /api/contact ─────────────────────────────────────────────────────
