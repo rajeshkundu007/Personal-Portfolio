@@ -1,362 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    ============================================================
-    index.html — Main Portfolio Page
-    ============================================================
-    This is the single HTML file that contains ALL sections
-    of the portfolio website:
-      - Navbar         : Navigation links at the top
-      - Hero           : Big intro section with name and title
-      - About          : Short bio and profile image area
-      - Skills         : Grid of skill cards
-      - Projects       : Showcase of work/projects
-      - Contact        : Form that sends data to the backend API
-      - Footer         : Social links and copyright
-
-    HOW IT CONNECTS TO THE BACKEND:
-      - The contact form in this file sends data to:
-          POST http://localhost:3000/api/contact
-      - This is handled in frontend/js/main.js using fetch().
-      - The backend stores the message in backend/data/messages.json.
-    ============================================================
-  -->
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO Meta Tags -->
-  <title>Rajesh Kundu — Electrical Engineering Student &amp; Web Developer</title>
-  <meta name="description" content="Portfolio of Rajesh Kundu, an Electrical Engineering B.Tech 3rd year student and beginner web developer." />
-  <meta name="keywords" content="Rajesh Kundu, Electrical Engineering, Web Developer, IoT, Portfolio, Cricket Auction, Robot Car" />
-  <meta name="author" content="Rajesh Kundu" />
-
-  <!-- Open Graph (for social media sharing previews) -->
-  <meta property="og:title" content="Rajesh Kundu — Electrical Engineering Student &amp; Web Developer" />
-  <meta property="og:description" content="Portfolio of Rajesh Kundu, Electrical Engineering student and Web Developer." />
-  <meta property="og:type" content="website" />
-
-  <!-- Google Fonts: Inter for clean modern typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <!-- Main Stylesheet -->
+  <title>Rajesh Kundu — Substation Control System</title>
+  <meta name="description" content="Portfolio of Rajesh Kundu, Electrical Engineering Student & Web Developer." />
+  
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════
-       NAVBAR — Top navigation bar
-       Fixed at the top; links scroll to each section.
-       JavaScript in main.js adds 'scrolled' class when
-       the user scrolls down to change its background.
-  ══════════════════════════════════════════════════ -->
+  <!-- LOADING BOOT SEQUENCE -->
+  <div id="boot-screen" class="boot-screen">
+    <div class="loader-content">
+      <div class="loader-logo">RJ<span class="accent">_GRID</span></div>
+      <div class="loader-pulse"></div>
+      
+      <div class="boot-terminal" id="boot-terminal">
+        <p class="term-text">> ESTABLISHING UPLINK...</p>
+        <p class="term-text">> INITIALIZING CORE RELAYS...</p>
+        <p class="term-text">> ENERGIZING GRID TO 400kV...</p>
+        <p class="term-text">> SYNCING FREQUENCY...</p>
+        <p class="term-text blink">> SUBSTATION ONLINE</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED BACKGROUND LIGHTNING & 3-PHASE POWER LINES -->
+  <canvas id="arc-canvas" class="arc-container"></canvas>
+  
+  <!-- 3-Phase Wire System -->
+  <div class="power-line-system">
+    <div class="wire wire-r"><div class="wire-pulse"></div></div>
+    <div class="wire wire-y"><div class="wire-pulse delay-1"></div></div>
+    <div class="wire wire-b"><div class="wire-pulse delay-2"></div></div>
+  </div>
+
+  <!-- NAVBAR: Telemetry Bar -->
   <nav id="navbar" class="navbar">
     <div class="nav-container">
-      <!-- Logo / Brand Name -->
-      <a href="#hero" class="nav-logo">RK<span class="accent">.</span></a>
+      <a href="#hero" class="nav-logo">RJ<span class="accent">_GRID</span></a>
+      
+      <div class="telemetry-status badge-online">
+        <span>SYSTEM_ONLINE</span>
+      </div>
 
-      <!-- Hamburger icon (visible only on mobile) -->
-      <button id="hamburger" class="hamburger" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <!-- Navigation Links -->
+      <button id="hamburger" class="hamburger">☰</button>
+      
       <ul id="nav-menu" class="nav-menu">
-        <li><a href="#about"    class="nav-link">About</a></li>
-        <li><a href="#skills"   class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact"  class="nav-link">Contact</a></li>
-        <li>
-          <a href="#contact" class="nav-link btn-hire">Hire Me</a>
-        </li>
+        <li><a href="#about" class="nav-link">Core Profile</a></li>
+        <li><a href="#history" class="nav-link">Grid History</a></li>
+        <li><a href="#skills" class="nav-link">Skill Matrix</a></li>
+        <li><a href="#projects" class="nav-link">Subsystems</a></li>
+        <li><a href="#contact" class="nav-link">Dispatch</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ══════════════════════════════════════════════════
-       HERO SECTION — The first thing the visitor sees
-       Contains the animated greeting, name, title,
-       a brief tagline, and call-to-action buttons.
-  ══════════════════════════════════════════════════ -->
+  <!-- HERO: High Voltage Incomer -->
   <section id="hero" class="hero">
-    <!-- Animated background orbs for visual depth -->
-    <div class="hero-orb orb-1"></div>
-    <div class="hero-orb orb-2"></div>
-    <div class="hero-orb orb-3"></div>
+    
+    <div class="transformer-box">
+      <!-- Transformer Hardware Graphics -->
+      <div class="bushing bushing-left"><div class="bushing-rings"></div></div>
+      <div class="bushing bushing-center"><div class="bushing-rings"></div></div>
+      <div class="bushing bushing-right"><div class="bushing-rings"></div></div>
+      <div class="cooling-fins fin-left"></div>
+      <div class="cooling-fins fin-right"></div>
+      
+      <div class="hero-content">
+        <p class="system-boot">> INITIATING SEQUENCE... ENERGIZING GRID</p>
+        <h1 class="hero-name">RAJESH KUNDU</h1>
+        
+        <h2 class="hero-title-wrapper">
+          <span id="typed-text" class="typed-text"></span>
+        </h2>
+        
+        <p class="hero-desc">
+          B.Tech Electrical Engineering Student | GATE 2026 Qualified (AIR 8605) <br/>
+          Bridging the gap between physical hardware and web interfaces through IoT, Robotics, and Code.
+        </p>
 
-    <div class="hero-content">
-      <!-- Greeting line with wave animation -->
-      <p class="hero-greeting">👋 Hello, I'm</p>
-
-      <!-- Main name heading -->
-      <h1 class="hero-name">Rajesh Kundu</h1>
-
-      <!-- Typed title effect — JS animates this text -->
-      <h2 class="hero-title">
-        I'm a <span id="typed-text" class="typed-text"></span>
-        <span class="cursor">|</span>
-      </h2>
-
-      <!-- Short tagline -->
-      <p class="hero-tagline">
-        I am an Electrical Engineering student pursuing my B.Tech 3rd Year,
-        combining core engineering with web development, IoT, and robotics.
-      </p>
-
-      <!-- Call to action buttons -->
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact"  class="btn btn-secondary">Get In Touch</a>
+      <div class="telemetry-grid">
+        <div class="telemetry-box">
+          <span class="t-label">Voltage</span>
+          <span class="t-value">400 kV</span>
+        </div>
+        <div class="telemetry-box">
+          <span class="t-label">Freq</span>
+          <span class="t-value" id="live-freq">50.00 Hz</span>
+        </div>
+        <div class="telemetry-box">
+          <span class="t-label">P.F.</span>
+          <span class="t-value">0.99 Ld</span>
+        </div>
+        <div class="telemetry-box">
+          <span class="t-label">Status</span>
+          <span class="t-value" style="color:var(--grid-green)">SYNC</span>
+        </div>
       </div>
-
-      <!-- Scroll down indicator -->
-      <div class="scroll-indicator">
-        <span>Scroll Down</span>
-        <div class="scroll-arrow"></div>
+      
+        <div class="hero-actions">
+          <a href="#projects" class="btn">View Subsystems</a>
+          <a href="#contact" class="btn btn-alert">Engage Contact</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════
-       ABOUT SECTION — Bio and personal information
-  ══════════════════════════════════════════════════ -->
-  <section id="about" class="section about">
+  <!-- ABOUT: Core Profile -->
+  <section id="about" class="section">
+    <div class="container transformer-layout">
+      
+      <div class="transformer-nameplate">
+        <div class="nameplate-screws screw-tl"></div>
+        <div class="nameplate-screws screw-tr"></div>
+        <div class="nameplate-screws screw-bl"></div>
+        <div class="nameplate-screws screw-br"></div>
+        
+        <h3 class="nameplate-title">MAIN TRANSFORMER SPECIFICATIONS</h3>
+        
+        <div class="spec-row">
+          <span class="spec-label">MODEL_ID:</span>
+          <span class="spec-value">RJ-EE-2023</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">PHASE:</span>
+          <span class="spec-value">3-PHASE STUDENT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">MAJOR:</span>
+          <span class="spec-value">ELECTRICAL ENGG.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">LOCATION:</span>
+          <span class="spec-value">INDIA GRID</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">CORE_FOCUS:</span>
+          <span class="spec-value">WEB / IOT / ROBOTICS</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">CGPA_RATING:</span>
+          <span class="spec-value">7.99</span>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <span class="hv-tag">CAUTION: HIGH POTENTIAL</span>
+        <h2 class="section-title">CORE PROFILE</h2>
+        <p>
+          I am Rajesh Kundu, an Electrical Engineering student stepping down high-voltage theoretical concepts into functional, low-voltage digital applications.
+        </p>
+        <p>
+          My technical coursewoRJ provides a deep understanding of Electrical Machines, Instruments, and Power Systems, while my passion for programming enables me to design SCADA-like web interfaces, IoT controllers, and automated systems.
+        </p>
+        <p>
+          Ready to integrate into new project grids and energize teams.
+        </p>
+        <a href="Rajesh_Kundu_CV.pdf" download="Rajesh_Kundu_CV.pdf" target="_blank" class="btn" style="margin-top:20px;">Download Schematic (Resume)</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Tower Separator -->
+  <div class="tower-separator">
+    <svg class="tower-svg" viewBox="0 0 100 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="0" x2="50" y2="150" stroke="#334455" stroke-width="3"/>
+      <path d="M20 40 h60 M10 80 h80 M0 120 h100" stroke="#334455" stroke-width="4"/>
+      <path d="M50 0 L20 40 L50 80 L10 120 L50 150 M50 0 L80 40 L50 80 L90 120 L50 150" stroke="#223344" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- HISTORY: Grid History -->
+  <section id="history" class="section">
     <div class="container">
-      <!-- Section Title -->
-      <div class="section-header">
-        <span class="section-tag">Get to Know Me</span>
-        <h2 class="section-title">About <span class="accent">Me</span></h2>
-      </div>
-
-      <div class="about-grid">
-        <!-- Left: Avatar / Profile Image -->
-        <div class="about-image-wrapper fade-in">
-          <div class="about-avatar">
-            <!-- Initials avatar (can be replaced with a real photo) -->
-            <div class="avatar-initials">RK</div>
-            <!-- Decorative ring -->
-            <div class="avatar-ring"></div>
-          </div>
-          <!-- Stats cards below avatar -->
-          <div class="about-stats">
-            <div class="stat-card">
-              <span class="stat-number">3rd</span>
-              <span class="stat-label">Year B.Tech</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number">4+</span>
-              <span class="stat-label">Projects Built</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-number">IoT</span>
-              <span class="stat-label">&amp; Robotics</span>
-            </div>
-          </div>
+      <h2 class="section-title">GRID HISTORY</h2>
+      <p class="mono-text" style="margin-top:-15px; margin-bottom:20px;">> Academic timeline & operational internships.</p>
+      
+      <div class="history-grid">
+        <div class="history-card">
+          <h4>B.Tech in Electrical Engineering</h4>
+          <p class="history-meta">Ramkrishna Mahato Govt. Engineering College | 2023 - Present</p>
+          <p>Current CGPA: 7.99</p>
         </div>
-
-        <!-- Right: Bio Text -->
-        <div class="about-text fade-in">
-          <h3>Electrical Engineering Student &amp; Web Developer from India 🇮🇳</h3>
-          <p>
-            I'm <strong>Rajesh Kundu</strong>, currently pursuing my B.Tech 3rd year in Electrical Engineering.
-            Alongside my core academic studies, I am actively building my skills as a beginner web developer,
-            bridging the gap between hardware systems and web interfaces.
-          </p>
-          <p>
-            My engineering coursework gives me a solid foundation in systems like electrical machines,
-            instruments, and automation. My passion for programming drove me to learn modern web technologies,
-            allowing me to construct functional web apps and interface them with hardware systems.
-          </p>
-          <p>
-            I love working on projects that involve IoT, microcontroller programming, machine learning, and clean web layouts.
-            I'm always eager to learn, build, and explore new technical horizons.
-          </p>
-
-          <!-- Download Resume button -->
-          <a href="#" class="btn btn-primary" id="btn-resume">Download Resume 📄</a>
+        <div class="history-card">
+          <h4>Industrial Trainee</h4>
+          <p class="history-meta">WBSETCL | Aug 2026</p>
+          <p>Gained practical exposure to power transmission systems, substations, protection, switchgear, and grid operations.</p>
+        </div>
+        <div class="history-card">
+          <h4>Summer Intern</h4>
+          <p class="history-meta">JGEC | June 2025 - July 2025</p>
+          <p>Application of MATLAB and PSpice with hands-on electrical equipment laboratory operations.</p>
+        </div>
+        <div class="history-card">
+          <h4>Vice Convenor</h4>
+          <p class="history-meta">TechFest Committee, RJMGEC | Jan 2026 - May 2026</p>
+          <p>Coordinated with the organizing team to plan and execute events and manage activities.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════
-       SKILLS SECTION — Technologies I work with
-  ══════════════════════════════════════════════════ -->
-  <section id="skills" class="section skills">
+  <!-- Tower Separator -->
+  <div class="tower-separator">
+    <svg class="tower-svg" viewBox="0 0 100 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="0" x2="50" y2="150" stroke="#334455" stroke-width="3"/>
+      <path d="M20 40 h60 M10 80 h80 M0 120 h100" stroke="#334455" stroke-width="4"/>
+      <path d="M50 0 L20 40 L50 80 L10 120 L50 150 M50 0 L80 40 L50 80 L90 120 L50 150" stroke="#223344" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- SKILLS: Switchgear & Circuit Breakers -->
+  <section id="skills" class="section">
+    <div class="container busbar-system">
+      <h2 class="section-title">SKILL MATRIX</h2>
+      <p class="mono-text" style="margin-top:-15px; margin-bottom:20px;">> Interactive Feeder Relays. Toggle to test circuits.</p>
+      
+      <!-- Main Busbar -->
+      <div class="busbar live" id="main-bus"></div>
+
+      <div class="breakers-grid">
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">C / C++</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 85%</div>
+        </div>
+
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">MATLAB</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 90%</div>
+        </div>
+
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">Web Dev (JS/HTML)</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 80%</div>
+        </div>
+
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">PSpice/LTspice</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 75%</div>
+        </div>
+        
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">Embedded Systems</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 85%</div>
+        </div>
+        
+        <div class="breaker-unit active" onclick="toggleBreaker(this)">
+          <h4 class="breaker-title">Core Electrical</h4>
+          <div class="breaker-switch"><div class="switch-handle"></div></div>
+          <div class="breaker-status">
+            <div class="led red"></div><div class="led green"></div>
+          </div>
+          <div class="breaker-load">LOAD: 95%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tower Separator -->
+  <div class="tower-separator">
+    <svg class="tower-svg" viewBox="0 0 100 150" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="0" x2="50" y2="150" stroke="#334455" stroke-width="3"/>
+      <path d="M20 40 h60 M10 80 h80 M0 120 h100" stroke="#334455" stroke-width="4"/>
+      <path d="M50 0 L20 40 L50 80 L10 120 L50 150 M50 0 L80 40 L50 80 L90 120 L50 150" stroke="#223344" stroke-width="2" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- PROJECTS: SCADA Displays -->
+  <section id="projects" class="section">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What I Know</span>
-        <h2 class="section-title">My <span class="accent">Skills</span></h2>
-      </div>
-
-      <!-- Skill cards grid -->
-      <div class="skills-grid">
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">🌐</div>
-          <h4>HTML5 / CSS3</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-          <span class="skill-percent">85%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">⚡</div>
-          <h4>JavaScript (ES6+)</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-          <span class="skill-percent">75%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">📡</div>
-          <h4>Internet of Things (IoT)</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-          <span class="skill-percent">80%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">📊</div>
-          <h4>MATLAB</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-          <span class="skill-percent">75%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">📐</div>
-          <h4>PSpice</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
-          <span class="skill-percent">70%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">⚙️</div>
-          <h4>Electrical Machines</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-          <span class="skill-percent">80%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">🔌</div>
-          <h4>Electrical Instruments</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-          <span class="skill-percent">75%</span>
-        </div>
-
-        <div class="skill-card fade-in">
-          <div class="skill-icon">🔧</div>
-          <h4>Git &amp; GitHub</h4>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-          <span class="skill-percent">75%</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════
-       PROJECTS SECTION — Showcase of work
-  ══════════════════════════════════════════════════ -->
-  <section id="projects" class="section projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">My Work</span>
-        <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
-      </div>
-
-      <!-- Projects grid: each card shows project info -->
-      <div class="projects-grid">
-
-        <!-- Project Card 1 -->
-        <div class="project-card fade-in">
-          <div class="project-img" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
-            <span class="project-emoji">🏏</span>
+      <h2 class="section-title">PROJECT SUBSYSTEMS</h2>
+      
+      <div class="scada-grid">
+        
+        <!-- Project 1 -->
+        <div class="scada-screen">
+          <div class="scada-header">
+            <span>BAY_01 // POWER_FAULT_SIM</span>
+            <span style="color:var(--grid-green)">ONLINE</span>
           </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
+          <canvas class="oscilloscope-canvas" id="osc-1"></canvas>
+          <div class="scada-body">
+            <h3 class="scada-title">Power System Line Fault Detection</h3>
+            <div class="scada-tags">
+              <span class="s-tag">MATLAB</span>
+              <span class="s-tag">Simulink</span>
+              <span class="s-tag">Protection</span>
             </div>
-            <h3 class="project-title">Cricket Auction App</h3>
-            <p class="project-desc">
-              A web application for simulated or real-time cricket player bidding, featuring a dashboard to manage player budgets, stats, and squad selection.
-            </p>
-            <div class="project-links">
-              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
-              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            <p class="scada-desc">MATLAB/Simulink-based three-phase power system line fault detection and protection model using an overcurrent relay.</p>
+            <div class="scada-actions">
+              <a href="https://github.com/rajeshkundu007/Power-System-Line-Fault-Detection-Protection-using-MATLAB-Simulink" target="_blank" class="btn" style="padding: 6px 12px; font-size:0.75rem;">GITHUB REPO</a>
             </div>
           </div>
         </div>
 
-        <!-- Project Card 2 -->
-        <div class="project-card fade-in">
-          <div class="project-img" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
-            <span class="project-emoji">🌤️</span>
+        <!-- Project 2 -->
+        <div class="scada-screen">
+          <div class="scada-header">
+            <span>BAY_02 // QRIX_RAILWAY</span>
+            <span style="color:var(--grid-green)">ONLINE</span>
           </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">API</span>
+          <canvas class="oscilloscope-canvas" id="osc-2"></canvas>
+          <div class="scada-body">
+            <h3 class="scada-title">QRix (Railway Inventory)</h3>
+            <div class="scada-tags">
+              <span class="s-tag">SIH</span>
+              <span class="s-tag">Asset Mgmt</span>
+              <span class="s-tag">Web App</span>
             </div>
-            <h3 class="project-title">Weather Forecast App</h3>
-            <p class="project-desc">
-              A clean web application that fetches real-time weather information and forecasts for any city using a public weather API, with dynamic backgrounds.
-            </p>
-            <div class="project-links">
-              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
-              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            <p class="scada-desc">A QR code based railway inventory system. Pairs QR codes with physical components to track stock and automate maintenance logs.</p>
+            <div class="scada-actions">
+              <a href="https://github.com/rajeshkundu007/QRix" target="_blank" class="btn" style="padding: 6px 12px; font-size:0.75rem;">GITHUB REPO</a>
             </div>
           </div>
         </div>
 
-        <!-- Project Card 3 -->
-        <div class="project-card fade-in">
-          <div class="project-img" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
-            <span class="project-emoji">🤖</span>
+        <!-- Project 3 -->
+        <div class="scada-screen">
+          <div class="scada-header">
+            <span>BAY_03 // AUTO_RC_CAR</span>
+            <span style="color:var(--grid-green)">ONLINE</span>
           </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">IoT</span>
-              <span class="tag">Machine Learning</span>
-              <span class="tag">Python</span>
-              <span class="tag">Hardware</span>
+          <canvas class="oscilloscope-canvas" id="osc-3"></canvas>
+          <div class="scada-body">
+            <h3 class="scada-title">Autonomous RC Car</h3>
+            <div class="scada-tags">
+              <span class="s-tag">ESP8266</span>
+              <span class="s-tag">Shortest-Path</span>
+              <span class="s-tag">Dijkstra</span>
             </div>
-            <h3 class="project-title">Voice Controlled Robot Car</h3>
-            <p class="project-desc">
-              An IoT project featuring a robotic car controlled by voice commands processed through a custom-trained machine learning model to ensure high-accuracy control.
-            </p>
-            <div class="project-links">
-              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
-              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            <p class="scada-desc">ESP8266-based Wi-Fi controlled RC car with a web interface and graph-based navigation utilizing Dijkstra’s shortest-path algorithm.</p>
+            <div class="scada-actions">
+              <a href="https://github.com/rajeshkundu007/auto-rc-car" target="_blank" class="btn" style="padding: 6px 12px; font-size:0.75rem;">GITHUB REPO</a>
             </div>
           </div>
         </div>
 
-        <!-- Project Card 4 -->
-        <div class="project-card fade-in">
-          <div class="project-img" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-            <span class="project-emoji">🚗</span>
+        <!-- Project 4 -->
+        <div class="scada-screen">
+          <div class="scada-header">
+            <span>BAY_04 // VOICE_RC_CAR</span>
+            <span style="color:var(--grid-green)">ONLINE</span>
           </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">Robotics</span>
-              <span class="tag">Sensors</span>
-              <span class="tag">Microcontrollers</span>
-              <span class="tag">Electrical</span>
+          <canvas class="oscilloscope-canvas" id="osc-4"></canvas>
+          <div class="scada-body">
+            <h3 class="scada-title">Voice-Controlled RC Car (ML)</h3>
+            <div class="scada-tags">
+              <span class="s-tag">Python</span>
+              <span class="s-tag">TensorFlow</span>
+              <span class="s-tag">Librosa</span>
             </div>
-            <h3 class="project-title">Automatic Path Select Robot Car</h3>
-            <p class="project-desc">
-              An autonomous robotic car that detects obstacles and selects the optimal path dynamically using sensors, pathfinding algorithms, and microcontrollers.
-            </p>
-            <div class="project-links">
-              <a href="#" class="btn btn-sm">Live Demo 🚀</a>
-              <a href="#" class="btn btn-sm btn-outline">GitHub 📂</a>
+            <p class="scada-desc">Voice-controlled RC car using Machine Learning. Built a speech classification model (96.36% acc) integrated with an ESP8266.</p>
+            <div class="scada-actions">
+              <a href="https://github.com/rajeshkundu007/Model-car-2" target="_blank" class="btn" style="padding: 6px 12px; font-size:0.75rem;">GITHUB REPO</a>
             </div>
           </div>
         </div>
@@ -365,158 +384,61 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════
-       CONTACT SECTION — Form connected to the backend
-       HOW IT WORKS:
-         1. User fills in name, email, message.
-         2. JavaScript intercepts the submit event.
-         3. fetch() sends the data to POST /api/contact.
-         4. Backend saves it to messages.json.
-         5. Success/error message is shown to the user.
-  ══════════════════════════════════════════════════ -->
-  <section id="contact" class="section contact">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Let's Talk</span>
-        <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
-      </div>
-
-      <div class="contact-grid">
-        <!-- Left: Contact Info Cards -->
-        <div class="contact-info fade-in">
-          <h3>Let's work together!</h3>
-          <p>
-            Have a project in mind? Want to collaborate? Or just want to say hi?
-            Fill out the form and I'll get back to you as soon as possible.
-          </p>
-
-          <!-- Info items -->
-          <div class="contact-item">
-            <span class="contact-icon">📧</span>
-            <div>
-              <strong>Email</strong>
-              <p>kundurj4359@gmail.com</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
-            <div>
-              <strong>Location</strong>
-              <p>India 🇮🇳</p>
-            </div>
-          </div>
-          <div class="contact-item">
-            <span class="contact-icon">💼</span>
-            <div>
-              <strong>Available For</strong>
-              <p>Freelance &amp; Full-Time Roles</p>
-            </div>
-          </div>
-
-          <!-- Social links -->
-          <div class="social-links">
-            <a href="https://github.com"   target="_blank" class="social-btn" id="link-github">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" class="social-btn" id="link-linkedin">LinkedIn</a>
-            <a href="https://twitter.com"  target="_blank" class="social-btn" id="link-twitter">Twitter</a>
-          </div>
-        </div>
-
-        <!-- Right: Contact Form -->
-        <div class="contact-form-wrapper fade-in">
-          <!--
-            id="contact-form" is used by main.js to attach the submit event listener.
-            On submit, main.js collects the form data and sends it to the backend.
-          -->
-          <form id="contact-form" class="contact-form" novalidate>
-
-            <!-- Name Field -->
-            <div class="form-group">
-              <label for="contact-name">Full Name *</label>
-              <input
-                type="text"
-                id="contact-name"
-                name="name"
-                placeholder="Your full name"
-                required
-                autocomplete="name"
-              />
-              <span class="field-error" id="error-name"></span>
-            </div>
-
-            <!-- Email Field -->
-            <div class="form-group">
-              <label for="contact-email">Email Address *</label>
-              <input
-                type="email"
-                id="contact-email"
-                name="email"
-                placeholder="your.email@example.com"
-                required
-                autocomplete="email"
-              />
-              <span class="field-error" id="error-email"></span>
-            </div>
-
-            <!-- Subject Field -->
-            <div class="form-group">
-              <label for="contact-subject">Subject</label>
-              <input
-                type="text"
-                id="contact-subject"
-                name="subject"
-                placeholder="What is this about?"
-                autocomplete="off"
-              />
-            </div>
-
-            <!-- Message Field -->
-            <div class="form-group">
-              <label for="contact-message">Message *</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project..."
-                required
-              ></textarea>
-              <span class="field-error" id="error-message"></span>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" id="btn-submit" class="btn btn-primary btn-full">
-              Send Message 🚀
-            </button>
-
-            <!-- Response message shown after form submission -->
-            <div id="form-response" class="form-response" aria-live="polite"></div>
-
-          </form>
+  <!-- CONTACT: Dispatch Terminal -->
+  <section id="contact" class="section">
+    <div class="container terminal-layout">
+      
+      <div class="terminal-info">
+        <h2 class="section-title" style="margin-bottom:10px;">DISPATCH</h2>
+        <h3>> ESTABLISH CONNECTION</h3>
+        <p class="mono-text" style="margin-top:15px; margin-bottom:20px; color:var(--text-main)">
+          Grid coordinate: INDIA<br/>
+          Port: rajeshkundu736@gmail.com<br/>
+          Status: AWAITING_SIGNAL...
+        </p>
+        
+        <div style="display:flex; gap:15px; margin-top:30px;">
+          <a href="https://github.com/rajeshkundu007" target="_blank" class="btn">GITHUB_NODE</a>
+          <a href="https://linkedin.com" target="_blank" class="btn">LINKEDIN_NODE</a>
         </div>
       </div>
+
+      <div class="terminal-form">
+        <!-- Connects to main.js and POST /api/contact -->
+        <form id="contact-form" novalidate>
+          <div class="form-group">
+            <label>> INPUT_IDENTIFIER [Name]</label>
+            <input type="text" id="contact-name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label>> INPUT_RETURN_VECTOR [Email]</label>
+            <input type="email" id="contact-email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label>> DATA_PAYLOAD [Message]</label>
+            <textarea id="contact-message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" id="btn-submit" class="btn btn-full btn-alert">DISPATCH SIGNAL ⚡</button>
+          
+          <div id="form-response" class="form-response"></div>
+        </form>
+      </div>
+
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════════════ -->
+  <!-- FOOTER: Earth Pit -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <p class="footer-logo">RK<span class="accent">.</span></p>
-      <p class="footer-copy">
-        © <span id="footer-year"></span> Rajesh Kundu. Built with ❤️ using HTML, CSS, JS &amp; Node.js.
-      </p>
-      <div class="footer-links">
-        <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+    <div class="container">
+      <div class="earth-status">
+        <span class="status-indicator"></span>
+        <span>EARTH GRID: 0.05 Ohms (NOMINAL)</span>
       </div>
+      <p>RJ_GRID © <span id="footer-year"></span> | DESIGNED BY 𝙍𝙖𝙟𝙚𝙨𝙝❤️✨  </p>
     </div>
   </footer>
 
   <!-- Main JavaScript File -->
-  <!-- This handles: animations, nav scroll, typed text, form submission -->
   <script src="js/main.js"></script>
-
 </body>
 </html>

@@ -291,4 +291,4 @@ No frontend dependencies — pure HTML, CSS, and JavaScript!
 
 ---
 
-*Built with ❤️ by Rajesh Kundu*
+*Built with ❤️ by 𝙍𝙖𝙟𝙚𝙨𝙝❤️✨*
