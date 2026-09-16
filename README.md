@@ -32,35 +32,6 @@ The background is powered by an HTML5 `<canvas>` that randomly generates bold, G
 ### 5. 100% Mobile Responsive
 The grid auto-scales for mobile devices. The transformer tank tucks in its cooling fins, the transmission towers shift safely to the margins, and the typography shrinks to maintain a clean reading experience without horizontal scrollbars.
 
----
-
-## 📧 Email Notifications Setup
-
-Whenever someone submits the contact form, you get an email at **kundurj4359@gmail.com**.
-
-### Step 1 — Generate a Gmail App Password
-Google blocks regular password logins from apps. You need a special **App Password**:
-
-1. Go to [myaccount.google.com](https://myaccount.google.com) → **Security**
-2. Enable **2-Step Verification** (required)
-3. Search for **"App Passwords"** in the search bar
-4. Click **App Passwords** → Select app: `Mail` → Device: `Other` → name it `Portfolio`
-5. Google shows a **16-character password** (e.g. `abcd efgh ijkl mnop`)
-
-### Step 2 — Add it to `.env`
-Open `backend/.env` and paste your App Password:
-```
-GMAIL_USER=kundurj4359@gmail.com
-GMAIL_PASS=abcdefghijklmnop        ← your 16-char App Password (no spaces)
-NOTIFY_EMAIL=kundurj4359@gmail.com
-```
-
-### Step 3 — Restart the server
-```bash
-node server.js
-```
-
----
 
 ## 📁 Project Structure
 
